@@ -174,6 +174,7 @@ class StudentController extends Controller
         }
         else
         {
+            
             if($request->gender=='ذكر')
             {
                 $student->image="../assets/img/students/guest.jpg";
@@ -184,7 +185,7 @@ class StudentController extends Controller
             }
             
         }
-     
+        $student->save();
         return redirect()->back()->with('success','student updated successfully');
     }
 

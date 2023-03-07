@@ -162,23 +162,7 @@
 </div>
 <script>
         
-    function test_college(select_id,cls)
-    {
-        var selectElement = document.getElementById('section');
-        var options = selectElement.options;
-        for (var i = 1; i < options.length; i++) {
-            options[i].setAttribute("hidden" ,"");
-
-        }
-        
-        var selectedId=document.getElementById(select_id).selectedIndex;
-        selected=document.getElementsByClassName(cls)[selectedId].value;
-        sect=document.getElementsByClassName(selected);
-        console.log(sect.length);
-        for (let index = 0; index < sect.length; index++) {
-            sect[index].removeAttribute("hidden");
-        }
-    }
+    
     
 
 </script>
