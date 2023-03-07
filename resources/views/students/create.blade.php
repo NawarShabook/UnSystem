@@ -118,13 +118,13 @@
                                 <option class='dropdown-item en' hidden value="المدنية">المدنية</option>                                    <option class='dropdown-item en' hidden value="الميكاترونيكس">الميكاترونيكس</option>
                                 <option class='dropdown-item mng' hidden value="الإدارة">الإدارة</option>
                                 <option class='dropdown-item mng' hidden value="المحاسبة">المحاسبة</option>
-                                <option class='dropdown-item ed' hidden value="معلم صف">معلم صف</option>
-                                <option class='dropdown-item ed' hidden value="الإرشاد النفسي">الإرشاد النفسي</option>
+                                <option class='dropdown-item ed' hidden value="معلم-صف">معلم صف</option>
+                                <option class='dropdown-item ed' hidden value="الإرشاد-النفسي">الإرشاد النفسي</option>
                                 <option class='dropdown-item law' hidden value="الشريعة">الشريعة</option>
                                 <option class='dropdown-item law' hidden value="القانون">القانون</option>
                                 <option class='dropdown-item hlth' hidden value="التمريض">التمريض</option>
                                 <option class='dropdown-item hlth' hidden value="التخدير">التخدير</option>
-                                <option class='dropdown-item hlth' hidden value="العلاج الفيزيائي">العلاج الفيزيائي</option>
+                                <option class='dropdown-item hlth' hidden value="العلاج-الفيزيائي">العلاج الفيزيائي</option>
                             </select>
                         </div>
                         <div class="col-md-4 mb-4">

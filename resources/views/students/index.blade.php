@@ -48,7 +48,7 @@
                             <td >{{$student->id}}</td>
                             <td>{{$student->firstName.' '.$student->lastName}}</td>
                             <td>{{$student->fatherName}}</td>
-                            <td>{{$student->college.' '.$student->section}}</td>
+                            <td>{{$student->college.'/'.$student->section}}</td>
                             <td>{{$student->level}}</td>
                             <td>{{$student->created_at->diffForHumans()}}</td>
                             <td>

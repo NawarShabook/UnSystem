@@ -105,7 +105,8 @@
 
                         <div class="col-md-4 mb-4">
                             <label class="labels">الكلية</label>        
-                            <select disabled id='college' class="select btn btn-primary" name="college" required onchange="test_college('college','college')" >                                    <option class="college" value="">الكلية</option>
+                            <select disabled id='college' class="select btn btn-primary" name="college" required onchange="test_college('college','college')" >                                    
+                                <option class="college" value="">الكلية</option>
                                 <option class="college" value="en">الهندسة</option>
                                 <option class="college" value="mng">الإدارة والاقتصاد</option>
                                 <option class="college" value="ed">التربية</option>
@@ -120,16 +121,17 @@
                             <select disabled class="select btn btn-secondary" id='section'   name='section' required>
                                 <option class='dropdown-item section' value="">القسم</option>
                                 <option class='dropdown-item en'  hidden value="المعلوماتية">المعلوماتية</option>
-                                <option class='dropdown-item en' hidden value="المدنية">المدنية</option>                                    <option class='dropdown-item en' hidden value="الميكاترونيكس">الميكاترونيكس</option>
+                                <option class='dropdown-item en' hidden value="المدنية">المدنية</option>
+                                <option class='dropdown-item en' hidden value="الميكاترونيكس">الميكاترونيكس</option>
                                 <option class='dropdown-item mng' hidden value="الإدارة">الإدارة</option>
                                 <option class='dropdown-item mng' hidden value="المحاسبة">المحاسبة</option>
-                                <option class='dropdown-item ed' hidden value="معلم صف">معلم صف</option>
-                                <option class='dropdown-item ed' hidden value="الإرشاد النفسي">الإرشاد النفسي</option>
+                                <option class='dropdown-item ed' hidden value="معلم-صف">معلم صف</option>
+                                <option class='dropdown-item ed' hidden value="الإرشاد-النفسي">الإرشاد النفسي</option>
                                 <option class='dropdown-item law' hidden value="الشريعة">الشريعة</option>
                                 <option class='dropdown-item law' hidden value="القانون">القانون</option>
                                 <option class='dropdown-item hlth' hidden value="التمريض">التمريض</option>
                                 <option class='dropdown-item hlth' hidden value="التخدير">التخدير</option>
-                                <option class='dropdown-item hlth' hidden value="العلاج الفيزيائي">العلاج الفيزيائي</option>
+                                <option class='dropdown-item hlth' hidden value="العلاج-الفيزيائي">العلاج الفيزيائي</option>
                             </select>
                         </div>
                         <div class="col-md-4 mb-4">
@@ -147,8 +149,9 @@
                     <div class="d-flex justify-content-center pt-3 pb-3 border mt-4">
                         <input type="reset" hidden class="btn btn-warning btn-lg ms-2 hd" />
                         <input type="submit" hidden class="btn btn-success btn-lg ms-2 hd" />
-                        <button type="button" id="update" onclick="updateStudent()" class="btn btn-success  ms-2" >تعديل الطالب</button>
-                        <form action="{{route('student.destroy',$student->id)}}" method="POST" style="display: inline;">
+                        <button type="button" id="update" onclick="updateStudent()" class="btn btn-success ms-2" >تعديل الطالب</button>
+                        <form action=""></form>
+                        <form action="{{route('student.destroy',$student->id)}}" id="df" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button id="delete"  title="delete" class="btn btn-danger ms-2">حذف الطالب </button>
@@ -180,33 +183,6 @@
     document.querySelector('option[value={{$student->section}}]').setAttribute("selected","");
     document.querySelector('option[value={{$student->level}}]').setAttribute("selected","");
    
-
-
-    function updateStudent()
-    {
-        inputs=document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.removeAttribute("disabled");
-            input.classList.add("border-dark")
-        });
-        selects=document.querySelectorAll('select');
-        selects.forEach(select => {
-            select.removeAttribute("disabled");
-        });
-
-        dsNone=document.getElementsByClassName('hd');
-       
-        for (let index = 0; index < dsNone.length; index++) {
-            console.log('index'+index);
-            console.log(dsNone[index] );
-            dsNone[index].removeAttribute("hidden","");
-
-        }
-
-        btnUpdate=document.getElementById('update').setAttribute("hidden","");
-        document.getElementById('delete').setAttribute("hidden","");
-       
-        
-    }
+    
 </script>
 @endsection
