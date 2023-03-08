@@ -27,7 +27,8 @@ return new class extends Migration
             $table->integer('room');
             $table->string('phoneNumber');
             $table->string('email');
-            $table->string('image');
+            $table->string('image')->nullable();
+
         });
     }
 
