@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.std')
 
 @section('content')
     
@@ -51,35 +51,35 @@
                 </div>
                 <div class='border p-2'>
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">الاسم الأول</label><input required type="text" name="firstName" class="form-control" placeholder="الاسم الأول" value=""></div>
-                        <div class="col-md-6"><label class="labels">الاسم الأخير</label><input required type="text" name="lastName" class="form-control" value="" placeholder="الاسم الأخير"></div>
+                        <div class="col-md-6"><label class="labels">الاسم الأول</label><input required type="text" name="firstName" class="form-control" placeholder="الاسم الأول" value="{{old( "firstName")}}"></div>
+                        <div class="col-md-6"><label class="labels">الاسم الأخير</label><input required type="text" name="lastName" class="form-control" value="{{old( "lastName")}}" placeholder="الاسم الأخير"></div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">اسم الأب</label><input required type="text"  name="fatherName" class="form-control" placeholder="اسم الأب" value=""></div>
-                        <div class="col-md-6"><label class="labels">اسم الأم</label><input required type="text" name="motherName" class="form-control" placeholder="اسم الأم" value=""></div>
+                        <div class="col-md-6"><label class="labels">اسم الأب</label><input required type="text"  name="fatherName" class="form-control" placeholder="اسم الأب" value="{{old( "fatherName")}}"></div>
+                        <div class="col-md-6"><label class="labels">اسم الأم</label><input required type="text" name="motherName" class="form-control" placeholder="اسم الأم" value="{{old( "motherName")}}"></div>
                         
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">تاريخ الولادة</label><input required type="date" name="birthDay" class="form-control" placeholder="تاريخ الميلاد" value=""></div>
-                        <div class="col-md-6"><label class="labels">المدينة</label><input required type="text" name="city" class="form-control" placeholder="المدينة" value=""></div>
+                        <div class="col-md-6"><label class="labels">تاريخ الولادة</label><input required type="date" name="birthDay" class="form-control" placeholder="تاريخ الميلاد" value="{{old( "birthDay")}}"></div>
+                        <div class="col-md-6"><label class="labels">المدينة</label><input required type="text" name="city" class="form-control" placeholder="المدينة" value="{{old( "city")}}"></div>
 
                     </div>    
 
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <label class="labels" for="form3Example1m1" >رقم الغرفة</label>
-                                <input required type="number" id="form3Example1m1" name="room" value="0" class="form-control" />
+                                <input required  type="number" id="form3Example1m1" name="room" value="0" class="form-control" />
                                 
                          </div>
                          <div class="col-md-6">
                             <label class="labels" for="form3Example1n1">رقم الهاتف</label>
 
-                             <input required type="tel" name="phoneNumber" id="form3Example1n1" placeholder="رقم الهاتف" class="form-control" />
+                             <input required type="tel" name="phoneNumber" id="form3Example1n1" placeholder="رقم الهاتف" class="form-control" vlaue="{{old( "phoneNumber")}}" />
                          </div>
                      </div>
 
                     <div class='row m-2'>
-                        <input type="email" placeholder="email address" required name='email' class="form-control" />
+                        <input type="email" placeholder="email address" required name='email' class="form-control" value="{{old( "email address")}}" />
                         
                     </div>
                     <div class="row mt-2 d-md-flex justify-content-start align-items-center mb-2 py-2 bg">
@@ -162,8 +162,6 @@
 </div>
 <script>
         
-    
-    
 
 </script>
 @endsection

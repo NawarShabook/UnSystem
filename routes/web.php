@@ -18,7 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/student', StudentController::class);
-Route::get('/dd', function () {
-    return view('test');
+Route::resource('/student', StudentController::class)->middleware(['auth', 'isAdmin']);
+Route::get('/main', function () {
+    return view('welcome');
 });
+
+Auth::routes();
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

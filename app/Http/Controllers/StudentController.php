@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    /**controller middleware */
+    // public function _construct()
+    // {
+    // $this->middleware('auth')->except(['index' ,'show']);
+    // $this->middleware('auth')->only(['store' ,'create']);
+    
+    // }
+
     /**
      * Display a listing of the resource.
      */
