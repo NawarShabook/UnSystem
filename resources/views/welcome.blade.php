@@ -37,20 +37,27 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm" >
         <div class="container-fluid">
           <a class="navbar-brand" href="{{url('/')}}">Home</a>
+        
+
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item">
+              @isAdmin
                 <a class="nav-link active" aria-current="page" href="{{route('student.index')}}" >كل الطلاب</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('student.create')}}">إضافة طالب</a>
               </li>
+              @endisAdmin
+
+              @isStudent
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="{{route('studentReq.create')}}">طلب تسجيل</a>
               </li>
+              @endisStudent
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Dropdown link
@@ -66,16 +73,18 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
+
+                @isAdmin
+                @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                @endif
+                @endisAdmin
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
@@ -102,6 +111,19 @@
         </div>
       </nav>
 </div>
+<div class="container">
+  <div class="row">
+      <div class="col">
+          <div class="jumbotron">
+              @if (Session::get('messageAdmin'))
+              <div class="alert alert-danger" role="alert">
+                  {{Session::get('messageAdmin')}}
+              </div>
+              @endif
+          </div>
+      </div>
+  </div>
+  </div>
   <!-- ======= Top Bar ======= -->
   
 

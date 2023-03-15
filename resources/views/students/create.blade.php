@@ -1,4 +1,4 @@
-@extends('layouts.std')
+@extends('layouts.app')
 
 @section('content')
     
@@ -40,7 +40,7 @@
                 </div>
                 
                 <span class="font-weight-bold">الصورة الشخصية</span>
-           
+
                 
             </div>
         </div>

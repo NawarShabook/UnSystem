@@ -24,4 +24,9 @@ class Student extends Model
     'phoneNumber',
     'email',];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

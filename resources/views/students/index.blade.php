@@ -1,12 +1,12 @@
-@extends('layouts.std')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="jumbotron">
                 <h1 class="display-4">All Student</h1>
-                <a class="btn btn-success" href="{{route('student.index')}}">All Students</a>
-                <a class="btn btn-warning" href="{{route('student.create')}}">Add Students</a>
+                {{-- <a class="btn btn-success" href="{{route('student.index')}}">All Students</a>
+                <a class="btn btn-warning" href="{{route('student.create')}}">Add Students</a> --}}
                 @if (Session::get('success'))
                 <div class="alert alert-success" role="alert">
                     {{Session::get('success')}}

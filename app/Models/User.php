@@ -42,4 +42,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function studentReq()
+    {
+        return $this->hasOne(studentReq::class)->where('role', 0);
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class)->where('role', 0);
+    }
 }
