@@ -19,7 +19,7 @@
 
     </div>
     <div class="row">
-
+       
         @if (count($students) > 0)
             <div class="col">
                 <table class="table table-bordered">
@@ -27,6 +27,7 @@
                         <tr>
                             <tr>
                                 <th>id</th>
+                                <th>user id</th>
                                 <th>الاسم واللقب</th>
                                 <th>اسم الأب</th>
                                 <th>الكلية والقسم</th>
@@ -44,6 +45,8 @@
                         <tr class="table-primary" >
                                     
                             <td >{{$student->id}}</td>
+                            <td >{{$student->user_id}}</td>
+                            
                             <td>{{$student->firstName.' '.$student->lastName}}</td>
                             <td>{{$student->fatherName}}</td>
                             <td>{{$student->college.'/'.$student->section}}</td>

@@ -19,19 +19,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-   
-    return view('welcome');
-   
+    return view('home');   
 });
 
-//routes for manage students by Admin user only 
-Route::resource('/student', StudentController::class)->middleware('isAdmin');
+//routes for manage students by Admin user only, the student can show his data
 
-//routes for students request
+Route::resource('/student', StudentController::class)->middleware('isAdmin');
+Route::get('/studentShow/{id}', [StudentController::class, 'show'])->name('student1.show')->middleware('auth');
+
+
+//routes for students request, the student cannot show all of 
 Route::resource('/studentReq', StudentReqController::class)->middleware('auth');
 Route::get('/studentReq', [StudentReqController::class, 'index'])->name('studentReq.index')->middleware('isAdmin');
-
 
 Route::get('/main', function () {
     return view('welcome');

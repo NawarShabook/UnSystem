@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\StudentReq;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -21,9 +25,6 @@ class StudentController extends Controller
     public function index()
     {
         $students=Student::all();
-       
-
-
         return view('students.index',['students'=>$students]);
     }
 
@@ -31,9 +32,13 @@ class StudentController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        
-        return view('students.create');
+    {  
+        //fetch name and email of student users 
+        $studentUsers=User::where('role',0)->get();
+
+      
+        return view('students.create', ['users'=>$studentUsers]);
+
     }
 
     /**
@@ -60,7 +65,21 @@ class StudentController extends Controller
             "image"=>"image",
         ]);
 
+        //fech email that related to this user with student role
+        $std_user=User::where('role', 0)->where('email', $request->email)->first();
         
+        //if this email student not found
+        if($std_user==null)
+        {
+            return redirect()->back()->withErrors("حساب الطالب المرتبط بهذا الإيميل غير موجود");
+        }
+
+        //if this student exist in database
+        elseif($std_user->student)
+        {
+            return redirect()->back()->withErrors("الطالب المرتبط بهذا الإيميل موجود مسبقا في قاعدة البيانات");
+        }
+
         
 
         //mass assignment
@@ -78,45 +97,94 @@ class StudentController extends Controller
             "room"=>$request->room,
             "phoneNumber"=>$request->phoneNumber,
             "email"=>$request->email,
+            "user_id"=>$std_user->id,
         ]);
-        //save image
+
+        //save image, if request has image 
         if($request->image)
         {
+           
             $image=$request->image;
             $newImageName=time().$image->getClientOriginalName();
+
             $image->move('assets/img/students',$newImageName);
-            $student->image='../assets/img/students/'.$newImageName;
+            $student->image=$newImageName;
             $student->save();
         }
+        //if request not has image set default image as gender
+        //and handling if request is from register request student, maybe has image
         else
         {
-            if($request->gender=='ذكر')
+            //if this store action is from register request test if request have image
+            if($request->oldReqId)
             {
-                $student->image="../assets/img/students/guest.jpg";
+                $old_req=StudentReq::select('id', 'image')->where('id', $request->oldReqId)->first();
+
+                //if id of request register is found 
+                if($old_req)
+                {
+
+                    $student->image=$old_req->image;
+                    $student->save();
+                }
             }
-            elseif($request->gender=='أنثى')
+            else
             {
-                $student->image="../assets/img/students/guestF.webp";
+                if($request->gender=='ذكر')
+                {
+                    $student->image="guest.jpg";
+                }
+                elseif($request->gender=='أنثى')
+                {
+                    $student->image="guestF.webp";
+                }
+                $student->save();
             }
-            $student->save();
+        }
+
+        //if this store action is from register request delete this request
+        if($request->oldReqId)
+        {
+            $old_req=StudentReq::where('id', $request->oldReqId)->first();
+            //if id of request register is found 
+            if($old_req)
+            {
+                $old_req->delete();
+            }
         }
        
-
-        return redirect()->back()->with('success','student added successfully');
+        return redirect()->route('student.index')->with('success','student added successfully');
     }
 
-    /**
+    /** dd
      * Display the specified resource.
      */
     public function show($id)
     {
+       
+        if(Auth::user()->role==='0')
+        {    
+            $student=Student::where('user_id',$id)->first();
+        }
+ 
+        else
+        {
+            $student=Student::where('id',$id)->first();
+        }
+        
         $colege= array("en"=>"الهندسة", "mng"=>"الإدارة والاقتصاد", "ed"=>"التربية", "law"=>"الشريعة والقانون", "hlth"=>"العلوم الصحية");
         
-        $student=Student::where('id',$id)->first();
+
         if($student==null)
         {
-            return redirect()->back()->with('errors','the student not found');
+            return redirect()->back()->withErrors('the student not found');
         }
+     
+        if((Auth::user()->role==='0')&&($student->user_id !== Auth::id()))
+        {
+            return redirect()->route('/home')->withErrors("هذا الإجراء يتطلب حساب مدير");
+        }
+        $student->image='../assets/img/students/'.$student->image;
         $student->college=array_search($student->college, $colege);
         return view('students.show',['student'=>$student]);
     }
@@ -126,9 +194,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return "edit controller";
+        //the edit view is mixed with show view
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -178,18 +245,18 @@ class StudentController extends Controller
             $image=$request->image;
             $newImageName=time().$image->getClientOriginalName();
             $image->move('assets/img/students',$newImageName);
-            $student->image='../assets/img/students/'.$newImageName;
+            $student->image=$newImageName;
         }
         else
         {
             
             if($request->gender=='ذكر')
             {
-                $student->image="../assets/img/students/guest.jpg";
+                $student->image="guest.jpg";
             }
             elseif($request->gender=='أنثى')
             {
-                $student->image="../assets/img/students/guestF.webp";
+                $student->image="guestF.webp";
             }
             
         }
@@ -201,12 +268,18 @@ class StudentController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {
+    {;
         $student=Student::where('id',$id)->first();
         if($student==null)
         {
             return redirect()->back();
         }
+        // if($student->image!='guest' && $student->image!='guestF')
+        // {
+        //     Storage::delete(public_path('assets/img/students/' . $student->image));
+         
+        // }
+
         $student->delete();
         return redirect()->route('student.index')->with('success','student deleted successfully');
     }

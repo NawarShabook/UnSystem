@@ -22,11 +22,12 @@ class Student extends Model
     'city',
     'room',
     'phoneNumber',
-    'email',];
+    'email',
+    'user_id'];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id')->where('role', 0);
     }
 
 }

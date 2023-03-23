@@ -2,7 +2,6 @@
 
 @section('content')
     
-
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col">
@@ -26,7 +25,7 @@
     </div>
     <hr>
     <div>
-    <form method="POST" method="{{route('studentReq.update', $student->id)}}"  enctype="multipart/form-data" >
+    <form method="POST" action="{{route('studentReq.update', $student->id)}}"  enctype="multipart/form-data" >
         @csrf
         @method("PUT")
     <div class="row">
@@ -49,7 +48,6 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-left">id:{{$student->id}}</h4>
                     <h4 class="text-right">بيانات الطالب </h4> 
-                   
                 </div>
                 <div class='border p-2'>
                     <div class="row mt-2">
@@ -81,11 +79,6 @@
                          </div>
                      </div>
 
-                     <div class='row m-2'>
-                        <input type="email" hidden placeholder="email address" disabled name='email' class="form-control hd" value="{{$student->email}}" />
-                        
-                    </div>
-                    
                     <div class="row mt-2 d-md-flex justify-content-start align-items-center mb-2 py-2 bg">
                         <div class="col-md-2 mb-0 me-4"><label class="labels fs-6">الجنس:</label></div>
                         
@@ -148,7 +141,11 @@
                     <div class="d-flex justify-content-center pt-3 pb-3 border mt-4">
                         <input type="reset" hidden class="btn btn-warning btn-lg ms-2 hd" />
                         <input type="submit" hidden class="btn btn-success btn-lg ms-2 hd" />
+                        @isStudent()
                         <button type="button" id="update" onclick="updateStudent()" class="btn btn-success ms-2" >تعديل الطلب</button>
+                        @else
+                        <button onclick="updateStudent()" id="update" class="btn btn-success ms-2">قبول الطلب</button>
+                        @endisStudent()
                         <form action=""></form>
                         <form action="{{route('studentReq.destroy',$student->id)}}" id="df" method="POST" style="display: inline;">
                             @csrf
@@ -177,11 +174,10 @@
     
     let gender = document.querySelector('input[value={{$student->gender}}]');
     gender.setAttribute("checked","");
-
+    
     document.querySelector('option[value={{$student->college}}]').setAttribute("selected","");
     document.querySelector('option[value={{$student->section}}]').setAttribute("selected","");
     document.querySelector('option[value={{$student->level}}]').setAttribute("selected","");
    
-    
 </script>
 @endsection

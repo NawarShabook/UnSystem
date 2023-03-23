@@ -7,9 +7,8 @@
     <div class="row">
         <div class="col">
             <div class="jumbotron">
-                <h1 class="display-4">Student Data</h1>
-                <a class="btn btn-success" href="{{route('student.index')}}">All Students</a>
-                <a class="btn btn-warning" href="{{route('student.create')}}">Add Students</a>
+                <h1 class="display-4">بيانات الطالب</h1>
+
                 @if (Session::get('success'))
                 <div class="alert alert-success" role="alert">
                     {{Session::get('success')}}
@@ -27,6 +26,7 @@
         </div>
     </div>
     <hr>
+    {{-- ../assets/img/students/guest.jpg --}}
     <div>
     <form method="POST" method="{{route('student.update', $student->id)}}"  enctype="multipart/form-data" >
         @csrf
@@ -35,6 +35,7 @@
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5 ">
                 <div class="image-upload">
+                  
                     <img  class="rounded-circle mt-5" width="150px" alt="Profile Image" src="{{$student->image}}">
 
                     <input disabled id="image-input"  type="file" name="image">
@@ -145,10 +146,10 @@
                             </select>
                         </div>
                     </div>
-
+                    @isAdmin
                     <div class="d-flex justify-content-center pt-3 pb-3 border mt-4">
-                        <input type="reset" hidden class="btn btn-warning btn-lg ms-2 hd" />
-                        <input type="submit" hidden class="btn btn-success btn-lg ms-2 hd" />
+                        <input type="reset" hidden class="btn btn-warning  ms-2 hd" />
+                        <input type="submit" hidden class="btn btn-success  ms-2 hd" />
                         <button type="button" id="update" onclick="updateStudent()" class="btn btn-success ms-2" >تعديل الطالب</button>
                         <form action=""></form>
                         <form action="{{route('student.destroy',$student->id)}}" id="df" method="POST" style="display: inline;">
@@ -157,6 +158,7 @@
                             <button id="delete"  title="delete" class="btn btn-danger ms-2">حذف الطالب </button>
                         </form>
                     </div>
+                    @endisAdmin
                 </div>
             </div>
             </div>

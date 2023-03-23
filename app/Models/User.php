@@ -45,11 +45,11 @@ class User extends Authenticatable
 
     public function studentReq()
     {
-        return $this->hasOne(studentReq::class)->where('role', 0);
+        return $this->hasOne(StudentReq::class);
     }
 
     public function student()
     {
-        return $this->hasOne(Student::class)->where('role', 0);
+        return $this->hasOne(Student::class);
     }
 }

@@ -28,13 +28,13 @@ class AdminMiddleware
             }
             else
             {
-                return redirect("/")->with("messageAdmin", "access denied as you are not Admin!");
+                return redirect("/")->withErrors("access denied as you are not Admin!");
             }
         }
 
         else
         {
-            return redirect("/login")->with("messageAdmin", "please login to access to the system");
+            return redirect("/login")->withErrors("please login to access to the system");
         }
 
     }

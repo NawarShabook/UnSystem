@@ -33,9 +33,10 @@
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5 ">
                 <div class="image-upload">
-                    <img class="rounded-circle mt-5" width="150px" alt="Upload Image" src="../assets/img/students/guest.jpg">
+                    <img class=" rounded-circle mt-5" id='stdImage' width="150px" alt="Upload Image" src="../../assets/img/students/guest.jpg">
+                    <span class="text-success d-none" id="checked-badge" ><i class="fa-solid fa-check-double"></i></span>
 
-                    <input id="image-input"  type="file" name="image">
+                    <input id="image-input"  type="file" name="image" accept="image/*" onchange="checkImageUpload()">
                 </div>
                 
                 <span class="font-weight-bold">الصورة الشخصية</span>
@@ -66,16 +67,16 @@
 
                     <div class="row mt-2">
                         
-                         <div class="col-md-6">
+                        <div class="col-md-6">
                             <label class="labels" for="form3Example1n1">رقم الهاتف</label>
-
                              <input required type="tel" name="phoneNumber" id="form3Example1n1" placeholder="رقم الهاتف" class="form-control" vlaue="{{old( "phoneNumber")}}" />
-                         </div>
-                     </div>
+                        </div>
 
-                     <div class="col-md-6">
-                        <input type="email" placeholder="email address" required name='email' class="form-control" value="{{old( "email address")}}" />
-                    </div>
+                        <div class="col-md-6">
+                            <label class="labels" for="form3Example1n1">البريد الإلكتروني</label>
+                            <input type="email" placeholder="email address" readonly required name='email' class="form-control" value="{{auth()->user()->email}}" />
+                        </div>
+
                     </div>
                     <div class="row mt-2 d-md-flex justify-content-start align-items-center mb-2 py-2 bg">
                         <div class="col-md-2 mb-0 me-4"><label class="labels fs-6">الجنس:</label></div>
@@ -110,7 +111,8 @@
                             <select class="select btn btn-secondary" id='section'   name='section' required>
                                 <option class='dropdown-item section' value="">القسم</option>
                                 <option class='dropdown-item en' hidden value="المعلوماتية">المعلوماتية</option>
-                                <option class='dropdown-item en' hidden value="المدنية">المدنية</option>                                    <option class='dropdown-item en' hidden value="الميكاترونيكس">الميكاترونيكس</option>
+                                <option class='dropdown-item en' hidden value="المدنية">المدنية</option>
+                                <option class='dropdown-item en' hidden value="الميكاترونيكس">الميكاترونيكس</option>
                                 <option class='dropdown-item mng' hidden value="الإدارة">الإدارة</option>
                                 <option class='dropdown-item mng' hidden value="المحاسبة">المحاسبة</option>
                                 <option class='dropdown-item ed' hidden value="معلم-صف">معلم صف</option>

@@ -24,6 +24,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">id</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Role</th>
@@ -37,6 +38,7 @@
                         @foreach ($users as $user)
                         <tr>
                             <td>{{$i++}}</td>
+                            <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>
