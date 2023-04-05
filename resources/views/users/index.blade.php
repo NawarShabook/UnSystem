@@ -49,12 +49,17 @@
                                 @endif
                             </td>
                             <td>
-                                <form action="{{route('users.destroy',$user->id)}}" method="POST" style="display: inline;">
+                                <form action="{{route('users.destroy',$user->id)}}" method="POST" style="display: inline;" onsubmit="return window.confirm('هل أنت متأكد من الحذف')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" title="delete" class="text-danger" style="border:none; background-color: transparent" ><i class="fa-solid fa-2x fa-trash"></i>
+                                    <input type="submit" title="delete" class="btn btn-danger btn-sm"  value="حذف" >
                                 </form>
+
+                                <a href="{{route('users.edit', $user->id)}}" title="edit" class="btn btn-warning btn-sm mx-4">تعديل</a>
                             </td>
+                           
+                                
+                           
                         </tr>
                         @endforeach
 

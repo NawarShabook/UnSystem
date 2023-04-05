@@ -59,8 +59,14 @@ function filterSrch(col,idd)
 {
         // Declare variables
         var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById(idd);
-        filter = input.value.toUpperCase();
+        if(idd!=="section" && idd!=="name" && idd!=="room"){
+            filter = idd;
+        } 
+        else{
+            input = document.getElementById(idd);
+            filter = input.value.toUpperCase();
+        }
+       
         table = document.getElementById("std");
         console.log(table);
         tr = table.getElementsByTagName("tr");

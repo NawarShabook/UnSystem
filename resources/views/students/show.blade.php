@@ -152,7 +152,7 @@
                         <input type="submit" hidden class="btn btn-success  ms-2 hd" />
                         <button type="button" id="update" onclick="updateStudent()" class="btn btn-success ms-2" >تعديل الطالب</button>
                         <form action=""></form>
-                        <form action="{{route('student.destroy',$student->id)}}" id="df" method="POST" style="display: inline;">
+                        <form action="{{route('student.destroy',$student->id)}}" id="df" method="POST" style="display: inline;" onsubmit="return window.confirm('هل أنت متأكد من الحذف')">
                             @csrf
                             @method('DELETE')
                             <button id="delete"  title="delete" class="btn btn-danger ms-2">حذف الطالب </button>

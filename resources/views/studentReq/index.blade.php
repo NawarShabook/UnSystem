@@ -53,9 +53,9 @@
                             <td>{{$student->level}}</td>
                             <td>{{$student->created_at->diffForHumans()}}</td>
                             <td>
-                                <a title="show" href="{{route('studentReq.show',$student->id)}}"><i class="fa-solid fa-2x fa-eye"></i></a> &nbsp;&nbsp;
+                                <a title="show" href="{{route('studentReq.show',$student->id)}}">show<i class="fa-solid fa-2x fa-eye"></i></a> &nbsp;&nbsp;
                                
-                                <form action="{{route('studentReq.destroy',$student->id)}}" method="POST" style="display: inline;">
+                                <form action="{{route('studentReq.destroy',$student->id)}}" method="POST" style="display: inline;" onsubmit="return window.confirm('هل أنت متأكد من الحذف')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" title="delete" class="text-danger" style="border:none; background-color: transparent" ><i class="fa-solid fa-2x fa-trash"></i></i>

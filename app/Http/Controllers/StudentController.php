@@ -80,7 +80,7 @@ class StudentController extends Controller
             return redirect()->back()->withErrors("الطالب المرتبط بهذا الإيميل موجود مسبقا في قاعدة البيانات");
         }
 
-        
+    
 
         //mass assignment
         $student=Student::create([

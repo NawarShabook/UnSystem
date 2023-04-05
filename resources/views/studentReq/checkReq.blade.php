@@ -150,7 +150,7 @@
                         <input type="submit" class="btn btn-success ms-2" value="قبول الطلب" />
                     <div>
                         <form action=""></form>
-                        <form action="{{route('studentReq.destroy',$student->id)}}" id="df" method="POST" style="display: inline;">
+                        <form action="{{route('studentReq.destroy',$student->id)}}" id="df" method="POST" style="display: inline;" onsubmit="return window.confirm('هل أنت متأكد من الحذف')">
                             @csrf
                             @method('DELETE')
                             <button id="delete"  title="delete" class="btn btn-danger ms-2">حذف الطلب </button>

@@ -21,11 +21,37 @@
 
     </div>
     <div class="row mb-2 ">
-        <div class="col-4 ">
+        <div class="col-4 " title="serch by name">
             <input type="text" class="form-control text-center" id="name" onkeyup="filterSrch(3,'name')" placeholder="بحث عن طريق الاسم">
         </div>
-        <div class="col-4">
-            <input type="text" class="form-control text-center" id="section" onkeyup="filterSrch(5,'section')" placeholder="بحث عن طريق القسم">
+        
+        <div class="col-4 px-5" >
+            <div class="dropdown hierarchy-select " id="example" >
+                            
+                <button type="button" class="btn btn-secondary dropdown-toggle" id="example-two-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                
+                <div class="dropdown-menu" aria-labelledby="example-two-button">
+                    <div class="hs-searchbox">
+                        <input type="text" id="section" class="form-control" autocomplete="off" onkeyup="filterSrch(5,'section')" placeholder="بحث عن طريق القسم">
+                    </div>
+                    <div class="hs-menu-inner">
+                        @php
+                        $coleges= array("en"=>"الهندسة", "mng"=>"الإدارة والاقتصاد", "ed"=>"التربية", "law"=>"الشريعة والقانون", "hlth"=>"العلوم الصحية");
+                            $i=1;
+                        @endphp
+                        <a class="dropdown-item" data-value="1" href="">بحث عن طريق القسم</a>
+                        @foreach ($coleges as $colege)
+                        <a class="dropdown-item" calss="$colege" data-value="{{++$i}}" value="{{$colege}}" onclick="filterSrch(5,'{{$colege}}')" >
+                            {{$colege}}
+            
+                        </a>
+                        @endforeach
+
+                    </div>
+                </div>
+                <input class="d-none" name="example_two" readonly="readonly" aria-hidden="true" type="text"/>
+            </div>
+            {{-- <input type="text" class="form-control text-center" id="section" > --}}
         </div>
         <div class="col-4">
             <input type="text" class="form-control text-center" id="room" onkeyup="filterSrch(7,'room')" placeholder="بحث عن طريق رقم الغرفة">
@@ -66,14 +92,14 @@
                             <td>{{$student->college.'/'.$student->section}}</td>
                             <td>{{$student->level}}</td>
                             <td>{{$student->room}}</td>
-                            <td>{{$student->created_at->diffForHumans()}}</td>
+                           <td>{{$student->created_at->format('d/m/Y')}}<br>{{$student->created_at->format('H:i')}}</td>
                             <td>
-                                <a title="show" href="{{route('student.show',$student->id)}}"><i class="fa-solid fa-2x fa-eye"></i></a> &nbsp;&nbsp;
+                                <a title="show" href="{{route('student.show',$student->id)}}" class="btn btn-info btn-sm">عرض</a> &nbsp;&nbsp;
                                
-                                <form action="{{route('student.destroy',$student->id)}}" method="POST" style="display: inline;">
+                                <form action="{{route('student.destroy',$student->id)}}" method="POST" style="display: inline;" onsubmit="return window.confirm('هل أنت متأكد من الحذف')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" title="delete" class="text-danger" style="border:none; background-color: transparent" ><i class="fa-solid fa-2x fa-trash"></i></i>
+                                    <input type="submit" title="delete" class="btn btn-danger btn-sm" value="حذف">
                                 </form>
                             </td>
                         </tr>
